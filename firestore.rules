@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function ownsDoc() {
+      return isAuthenticated() && resource.data.user_id == request.auth.uid;
+    }
+
+    function creatingOwnDoc() {
+      return isAuthenticated() && request.resource.data.user_id == request.auth.uid;
+    }
+
+    match /profiles/{userId} {
+      allow read, update, delete: if isOwner(userId);
+      allow create: if isOwner(userId);
+    }
+
+    match /inspections/{inspectionId} {
+      allow read, update, delete: if ownsDoc();
+      allow create: if creatingOwnDoc();
+
+      match /results/{resultId} {
+        allow read, write: if isAuthenticated() &&
+          get(/databases/$(database)/documents/inspections/$(inspectionId)).data.user_id == request.auth.uid;
+      }
+    }
+
+    match /cameras/{cameraId} {
+      allow read, update, delete: if ownsDoc();
+      allow create: if creatingOwnDoc();
+    }
+
+    match /inventory/{itemId} {
+      allow read, update, delete: if ownsDoc();
+      allow create: if creatingOwnDoc();
+    }
+
+    match /alerts/{alertId} {
+      allow read, update, delete: if ownsDoc();
+      allow create: if creatingOwnDoc();
+    }
+
+    match /settings/{settingId} {
+      allow read, update, delete: if ownsDoc();
+      allow create: if creatingOwnDoc();
+    }
+
+    match /dashboard_stats/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /newsletter_subscribers/{docId} {
+      allow read, write: if false;
+    }
+  }
+}

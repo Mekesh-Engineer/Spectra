@@ -1,0 +1,138 @@
+/* src/styles/base/globals.css */
+@import 'tailwindcss';
+@import './variables.css';
+@import './animations.css';
+@import '../pages/homepage.css';
+
+/* Tailwind v4 CSS-First Theme Configuration */
+@theme {
+  /* Font Families */
+  --font-sans: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-secondary), ui-serif, Georgia, serif;
+
+  /* ── System Colors (Dark Mode Defaults) ── */
+  /* Surfaces */
+  --color-sys-bg-primary: var(--sys-bg-primary);
+  --color-sys-bg-secondary: var(--sys-bg-secondary);
+  --color-sys-bg-tertiary: var(--sys-bg-tertiary);
+  --color-sys-border: var(--sys-border);
+
+  /* Legacy aliases (deprecated — use secondary/tertiary instead) */
+  --color-sys-bg-surface: var(--sys-bg-secondary);
+  --color-sys-bg-elevated: var(--sys-bg-tertiary);
+
+  /* Text */
+  --color-sys-text-primary: var(--sys-text-primary);
+  --color-sys-text-secondary: var(--sys-text-secondary);
+
+  /* Accent (Vibrant Orange) */
+  --color-sys-accent: var(--sys-accent);
+  --color-sys-accent-light: var(--sys-accent-light);
+  --color-sys-accent-dark: var(--sys-accent-dark);
+
+  /* Semantic */
+  --color-sys-success: var(--sys-success);
+  --color-sys-error: var(--sys-error);
+  --color-sys-warning: var(--sys-warning);
+  --color-sys-info: var(--sys-info);
+
+  /* Dynamic Canvas Colors (Mapped to variables.css) */
+  --color-canvas-primary: var(--color-primary);
+  --color-canvas-secondary: var(--color-secondary);
+}
+
+/* Base layer overrides */
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scrollbar-gutter: stable;
+    position: relative;
+  }
+
+  body,
+  #root {
+    position: relative;
+    background: var(--sys-bg-primary);
+    color: var(--sys-text-primary);
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  a {
+    color: var(--sys-accent);
+  }
+
+  a:hover {
+    color: var(--sys-accent-dark);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-sys-border);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Text selection */
+  ::selection {
+    background-color: var(--color-sys-accent);
+    color: #ffffff;
+  }
+}
+
+/* ── Servo Controller ─────────────────────────────────────────────────── */
+.servo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--sys-border);
+  background: var(--sys-bg-primary);
+  color: var(--sys-text-secondary);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.servo-btn:hover {
+  background: var(--sys-bg-tertiary);
+  color: var(--sys-text-primary);
+}
+
+.servo-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--sys-border);
+  outline: none;
+  cursor: pointer;
+}
+
+.servo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--sys-accent);
+  border: 2px solid var(--sys-bg-primary);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.servo-slider:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

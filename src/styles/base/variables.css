@@ -1,0 +1,60 @@
+/* src/styles/base/variables.css */
+/* All color tokens sourced from src/styles/theme.ts */
+:root {
+  /* ── System Colors: Light Mode (Default) ── */
+  /* Surfaces */
+  --sys-bg-primary: #ffffff;
+  --sys-bg-secondary: #f8fafc;
+  --sys-bg-tertiary: #eef2f7;
+  --sys-border: #dbe3ee;
+  /* Text */
+  --sys-text-primary: #0f172a;
+  --sys-text-secondary: #4b5563;
+  /* Accent (Primary Red + balanced supporting tones) */
+  --sys-accent: #dc2626;
+  --sys-accent-light: #f87171;
+  --sys-accent-dark: #991b1b;
+  /* Semantic */
+  --sys-success: #0f766e;
+  --sys-error: #dc2626;
+  --sys-warning: #ca8a04;
+  --sys-info: #2563eb;
+  /* Canvas Theme (Mutable via JS — useThemeEngine) */
+  --color-primary: #dc2626;
+  --color-secondary: #2563eb;
+  /* Font Pairings (Mutable via JS) */
+  --font-primary: 'Inter';
+  --font-secondary: 'Inter';
+}
+
+/* ── System Colors: Dark Mode ── */
+[data-mode='dark'] {
+  /* True dark palette for clear mode contrast */
+  --sys-bg-primary: #0b1220;
+  --sys-bg-secondary: #111b2e;
+  --sys-bg-tertiary: #17233a;
+  --sys-border: #24344f;
+  /* Text */
+  --sys-text-primary: #e6edf7;
+  --sys-text-secondary: #9fb0c9;
+  /* Accent */
+  --sys-accent: #f87171;
+  --sys-accent-light: #fca5a5;
+  --sys-accent-dark: #ef4444;
+  /* Semantic */
+  --sys-success: #14b8a6;
+  --sys-error: #f87171;
+  --sys-warning: #facc15;
+  --sys-info: #60a5fa;
+}
+
+/* ── Canvas Mode Overrides (live portfolio preview) ── */
+[data-theme='light'] {
+  --color-canvas-bg: #ffffff;
+  --color-canvas-text: #111827;
+}
+
+[data-theme='dark'] {
+  --color-canvas-bg: #000000;
+  --color-canvas-text: #f9fafb;
+}
